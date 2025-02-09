@@ -1,0 +1,21 @@
+name: Deploy Static Website
+
+on:
+  push:
+    branches:
+      - main  # Trigger deployment on push to the 'main' branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2  # This step checks out your repository
+
+    - name: Deploy to GitHub Pages
+      uses: JamesIves/github-pages-deploy-action@v4  # GitHub Pages deployment action
+      with:
+        branch: gh-pages  # The branch to deploy to (typically 'gh-pages' for GitHub Pages)
+        folder: .  # Your site’s files are at the root of the repository
+        token: ${{ secrets.GITHUB_TOKEN }}  # GitHub token to authenticate deployment
